@@ -11,23 +11,57 @@
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.parent {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: center;
+  padding: calc(100px + 2vmin) 0 0 0;
+}
+
+.kazooItems {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.kazooItems:first-child {
+  padding: calc(100px + 2vmin) 0 0 0;
+}
+
+.kazooButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .App-link {
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.maxSettings {
+  flex: 3;
+}
+
+.radioButtons {
+  flex: 1;
+}
+
+.maxVolume {
+  padding: 0 10px 0 0
+}
+
+.kazooDropDown {
+  background: #f2f2f2;
+  border: 1px solid;
+  border-color: white #f7f7f7 whitesmoke;
+  border-radius: 3px;
+  width: 50px;
+  margin: 0 15px 0 0;
 }

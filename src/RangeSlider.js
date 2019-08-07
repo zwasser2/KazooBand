@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import Slider from '@material-ui/lab/Slider';
+import Slider from '@material-ui/core/Slider';
 
 const useStyles = makeStyles({
     root: {
@@ -17,7 +17,7 @@ export default function RangeSlider(props) {
     const self = this
     const classes = useStyles();
 
-    const [value, setValue] = React.useState([0, 1]);
+    const [value, setValue] = React.useState([0, props.maxValue]);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -27,10 +27,9 @@ export default function RangeSlider(props) {
     return (
         <div className={classes.root}>
             <Typography id="range-slider" gutterBottom>
-                Time Range (seconds)
             </Typography>
             <Slider
-                value={value}
+                value={props.passedRange || value}
                 onChange={handleChange}
                 valueLabelDisplay="auto"
                 aria-labelledby="range-slider"

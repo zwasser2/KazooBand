@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "latest",
+    "@material-ui/core": "^4.3.1",
     "@material-ui/lab": "latest",
+    "bootstrap": "^4.3.1",
     "react": "^16.8.6",
+    "react-bootstrap": "^1.0.0-beta.10",
     "react-compound-slider": "^0.16.3",
     "react-dom": "^16.8.6",
     "react-rangeslider": "^2.2.0",
