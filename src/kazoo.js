@@ -1,4 +1,5 @@
 import React from 'react';
+import Amplitude from "./Amplitude"
 import RangeSlider from "./RangeSlider"
 
 export default class KazooReact extends React.Component {
@@ -43,6 +44,11 @@ export default class KazooReact extends React.Component {
         this.props.onChangeRange(parseInt(this._reactInternalFiber.key), [this.props.range.start, newValue])
     }
 
+    modifyAmplitude = (newVolume) => {
+        const volumeBarRangeToAudioRange = 100
+        this.props.modifyAmplitude(parseInt(this._reactInternalFiber.key), newVolume / volumeBarRangeToAudioRange)
+    }
+
     render() {
         return(
             <div className="kazooItems">
@@ -54,9 +60,16 @@ export default class KazooReact extends React.Component {
                     <option value="G">G</option>
                 </select>
                 <RangeSlider maxValue={this.props.maxTime} passedRange={Object.values(this.props.range)} onChange={this.handleRangeChange}/>
-                <input type="text" value={this.props.range.start} onChange={this.handleInputRangeStart}/>
-                <input type="text" value={this.props.range.end} onChange={this.handleInputRangeEnd}/>
-                <button onClick={this.deleteKazoo}> Delete Kazoo </button>
+                <div className="kazooPaddingLeft">
+                    <input type="text" value={this.props.range.start} onChange={this.handleInputRangeStart}/>
+                </div>
+                <div className="kazooPaddingLeft">
+                    <input type="text" value={this.props.range.end} onChange={this.handleInputRangeEnd}/>
+                </div>
+                <div className="kazooPaddingLeft">
+                    <button onClick={this.deleteKazoo}> Delete Kazoo </button>
+                </div>
+                <Amplitude modifyAmplitude={this.modifyAmplitude} />
             </div>
         )
     }
