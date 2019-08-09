@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/KazooBand/static/css/main.c2e5557d.chunk.css",
-    "main.js": "/KazooBand/static/js/main.ce1f8e20.chunk.js",
-    "main.js.map": "/KazooBand/static/js/main.ce1f8e20.chunk.js.map",
-    "runtime~main.js": "/KazooBand/static/js/runtime~main.6b250df0.js",
-    "runtime~main.js.map": "/KazooBand/static/js/runtime~main.6b250df0.js.map",
-    "static/js/2.0285918b.chunk.js": "/KazooBand/static/js/2.0285918b.chunk.js",
-    "static/js/2.0285918b.chunk.js.map": "/KazooBand/static/js/2.0285918b.chunk.js.map",
-    "index.html": "/KazooBand/index.html",
-    "precache-manifest.271cf94f0ad609739a932b64b2fccfcd.js": "/KazooBand/precache-manifest.271cf94f0ad609739a932b64b2fccfcd.js",
-    "service-worker.js": "/KazooBand/service-worker.js",
-    "static/css/main.c2e5557d.chunk.css.map": "/KazooBand/static/css/main.c2e5557d.chunk.css.map"
+    "main.css": "/static/css/main.89844039.chunk.css",
+    "main.js": "/static/js/main.958dcff8.chunk.js",
+    "main.js.map": "/static/js/main.958dcff8.chunk.js.map",
+    "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
+    "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
+    "static/js/2.0285918b.chunk.js": "/static/js/2.0285918b.chunk.js",
+    "static/js/2.0285918b.chunk.js.map": "/static/js/2.0285918b.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.65f4edfa0e95b2bf672153d515457c7c.js": "/precache-manifest.65f4edfa0e95b2bf672153d515457c7c.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.89844039.chunk.css.map": "/static/css/main.89844039.chunk.css.map"
   }
 }
