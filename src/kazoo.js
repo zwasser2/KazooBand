@@ -53,7 +53,7 @@ export default class KazooReact extends React.Component {
 
     render() {
         return(
-            <div className="kazooItems">
+            <div className="kazooItems slideInClass">
                 <select className="kazooDropDown" value={this.props.note} onChange={this.handleChange}>
                     <option value="A">A</option>
                     <option value="D">D</option>

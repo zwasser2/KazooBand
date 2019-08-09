@@ -80,11 +80,13 @@
 }
 
 input[type="text"] {
-  background: #f2f2f2;
-  border: 1px solid;
-  border-color: white #f7f7f7 whitesmoke;
+  background: #282c38;
+  color:white;
+  border: 3px solid;
+  border-color: white;;
   border-radius: 3px;
   margin-left: 5px;
+  padding-left: 5px;
 }
 
 button {
@@ -116,8 +118,14 @@ button {
 }
 
 .soundBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   width: 200px;
   margin-top: 15px;
+  flex-wrap: nowrap;
+
 }
 
 .kazooTrash {
@@ -127,4 +135,51 @@ button {
 
 .radio {
   margin-left: 10px;
+}
+
+.purpleColor {
+  color:purple;
+}
+
+.slideInClass {
+  animation: slidein 1s;
+}
+
+.slideOutClass {
+  animation: slideout 1s;
+}
+
+.MuiGrid-container {
+  width:100%;
+  display:flex;
+  flex-wrap:nowrap;
+  box-sizing:border-box;
+}
+
+.idk1 {
+  display: flex;
+  flex-wrap: nowrap !important;
+}
+@keyframes slidein {
+  from {
+    margin-left: 100%;
+    opacity: 0
+  }
+
+  to {
+    margin-left: 0%;
+    opacity:1
+  }
+}
+
+@keyframes slideout {
+  to {
+    margin-left: 100%;
+    opacity: 0
+  }
+
+  from {
+    margin-left: 0%;
+    opacity:1
+  }
 }

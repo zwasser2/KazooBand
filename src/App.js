@@ -29,18 +29,16 @@ Kazoo.prototype.setVolume = function(newVolume) {
 class App extends React.Component {
     constructor(props) {
         // I create this initial Kazoo to give the user an idea of how the UI is set up
-        var kazooE = new Kazoo('E')
-        kazooE.range.end = 2
         super(props)
         this.state = {
             secondIncrements: 'second',
-            kazoos: [kazooE],
+            kazoos: [],
             maxTime: 5,
             isTimerStarted: false,
             timeRunning: 0,
             timeOut: undefined,
             isPaused: true,
-            isRestart: false
+            isRestart: false,
         }
     }
 
@@ -65,7 +63,7 @@ class App extends React.Component {
     playKazooTimeoutFunction = (kazoo, timeOffset, pauseTimeOffset) => {
         setTimeout(() => {
             // Statement is needed so sound doesn't turn on and immediately off, creating a bad noise
-            if ((kazoo.range.end * timeOffset) / 1000 > pauseTimeOffset) {
+            if ((kazoo.range.end * timeOffset) / 1000 > pauseTimeOffset && !this.state.isPaused) {
                 kazoo.playSound()
             }
             this.stopKazooTimeoutFunction(kazoo, timeOffset, pauseTimeOffset)
@@ -184,6 +182,10 @@ class App extends React.Component {
 
     fullFinish = () => {
         this.setState({isPaused: true})
+        this.state.kazoos.forEach((kazoo) => {
+            kazoo.audio.pause()
+        })
+
     }
 
     render() {

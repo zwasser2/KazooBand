@@ -6,6 +6,7 @@ import Slider from '@material-ui/core/Slider';
 import VolumeDown from '@material-ui/icons/VolumeDown';
 import VolumeUp from '@material-ui/icons/VolumeUp';
 
+
 export default class Amplitude extends React.Component {
     constructor(props) {
         super(props);
@@ -18,18 +19,19 @@ export default class Amplitude extends React.Component {
         this.props.modifyAmplitude(newValue)
     };
 
+
     render() {
 
         return (
             <div className="soundBar">
-                <Grid container spacing={2}>
-                    <Grid item>
+                <Grid className="idk1" container spacing={2}>
+                    <Grid item className="idk2">
                         <VolumeDown />
                     </Grid>
-                    <Grid item xs>
+                    <Grid item xs className="idk3">
                         <Slider value={this.state.value} onChange={this.handleChange} aria-labelledby="continuous-slider" />
                     </Grid>
-                    <Grid item>
+                    <Grid item className="idk4">
                         <VolumeUp />
                     </Grid>
                 </Grid>
