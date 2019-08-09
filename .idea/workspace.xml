@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d3bd8636-df37-4e44-9c23-480a614deb51" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/public/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/amplitude.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/amplitude.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kazoo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/kazoo.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -129,16 +124,16 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/README.md">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/README.md">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="612">
-              <caret line="36" column="23" selection-start-line="36" selection-start-column="23" selection-end-line="36" selection-end-column="23" />
+            <state relative-caret-position="459">
+              <caret line="27" column="34" lean-forward="true" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -147,7 +142,7 @@
         <entry file="file://$PROJECT_DIR$/package-lock.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="248">
-              <caret line="5622" column="7" lean-forward="true" selection-start-line="5622" selection-start-column="7" selection-end-line="5622" selection-end-column="7" />
+              <caret line="5622" column="7" selection-start-line="5622" selection-start-column="7" selection-end-line="5622" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -244,8 +239,8 @@
         <option value="$PROJECT_DIR$/src/Amplitude.js" />
         <option value="$PROJECT_DIR$/src/App.css" />
         <option value="$PROJECT_DIR$/src/App.js" />
-        <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/package.json" />
       </list>
     </option>
   </component>
@@ -314,15 +309,15 @@
     <property name="settings.editor.selected.configurable" value="template.copyright.formatting" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\zacha\WebstormProjects\kazoo\src" />
-      <recent name="C:\Users\zacha\WebstormProjects\kazoo" />
-      <recent name="C:\Users\zacha\WebstormProjects\kazoo\public" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\zacha\WebstormProjects\kazoo\public" />
       <recent name="C:\Users\zacha\WebstormProjects\kazoo" />
       <recent name="C:\Users\zacha\WebstormProjects\kazoo\src" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\zacha\WebstormProjects\kazoo\public" />
+      <recent name="C:\Users\zacha\WebstormProjects\kazoo\src" />
+      <recent name="C:\Users\zacha\WebstormProjects\kazoo" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -350,12 +345,12 @@
       <workItem from="1560874317083" duration="18743000" />
       <workItem from="1561860532365" duration="66000" />
       <workItem from="1564863426748" duration="6417000" />
-      <workItem from="1564954556572" duration="74427000" />
+      <workItem from="1564954556572" duration="74677000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="99653000" />
+    <option name="totallyTimeSpent" value="99903000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -552,22 +547,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="36" column="23" selection-start-line="36" selection-start-column="23" selection-end-line="36" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package-lock.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="248">
-          <caret line="5622" column="7" lean-forward="true" selection-start-line="5622" selection-start-column="7" selection-end-line="5622" selection-end-column="7" />
+          <caret line="5622" column="7" selection-start-line="5622" selection-start-column="7" selection-end-line="5622" selection-end-column="7" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
+    <entry file="file://$PROJECT_DIR$/public/README.md">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="34" lean-forward="true" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
+        </state>
+      </provider>
     </entry>
   </component>
 </project>
