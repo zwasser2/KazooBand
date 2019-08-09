@@ -24,14 +24,14 @@ export default class Amplitude extends React.Component {
 
         return (
             <div className="soundBar">
-                <Grid className="idk1" container spacing={2}>
-                    <Grid item className="idk2">
+                <Grid className="volumeSlider" container spacing={2}>
+                    <Grid item>
                         <VolumeDown />
                     </Grid>
-                    <Grid item xs className="idk3">
+                    <Grid item xs>
                         <Slider value={this.state.value} onChange={this.handleChange} aria-labelledby="continuous-slider" />
                     </Grid>
-                    <Grid item className="idk4">
+                    <Grid item>
                         <VolumeUp />
                     </Grid>
                 </Grid>

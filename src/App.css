@@ -156,7 +156,7 @@ button {
   box-sizing:border-box;
 }
 
-.idk1 {
+.volumeSlider {
   display: flex;
   flex-wrap: nowrap !important;
 }
