@@ -1,10 +1,12 @@
 import React from 'react';
 import './App.css';
-import RangeSlider from './RangeSlider.js'
 import MaxValueInput from './MaxValueInput.js'
 import KazooReact from './kazoo.js'
 import ContinuousSlider from './ContinuousSlider.js'
 import SheetMusic from './SheetMusic.js'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPause, faPlay, faArrowLeft, faPlus, faEraser} from '@fortawesome/free-solid-svg-icons'
+
 
 function Kazoo(kazooNote) {
     this.note = kazooNote;
@@ -27,17 +29,17 @@ Kazoo.prototype.setVolume = function(newVolume) {
 class App extends React.Component {
     constructor(props) {
         // I create this initial Kazoo to give the user an idea of how the UI is set up
-        var kazooD = new Kazoo('E')
-        kazooD.range.end = 2
+        var kazooE = new Kazoo('E')
+        kazooE.range.end = 2
         super(props)
         this.state = {
             secondIncrements: 'second',
-            kazoos: [kazooD],
+            kazoos: [kazooE],
             maxTime: 5,
-            isTimerStarted: 0,
+            isTimerStarted: false,
             timeRunning: 0,
             timeOut: undefined,
-            isPaused: false,
+            isPaused: true,
             isRestart: false
         }
     }
@@ -49,12 +51,11 @@ class App extends React.Component {
         var timeOffset = secondIncrements === 'second' ? 1000 : 100
         this.setState({isTimerStarted: true})
         setTimeout(() => {
-            const isFinished = (this.state.timeRunning > .99 * this.state.maxTime)
+            const isFinished = (this.state.timeRunning > .995 * this.state.maxTime * timeOffset / 1000)
             if (isFinished) {
                 this.setState({isTimerStarted: false})
                 this.setState({timeRunning: 0})
             }
-
         }, (this.state.maxTime - this.state.timeRunning) * timeOffset)
         for (var i = 0; i < listOfKazoos.length; i ++) {
             this.playKazooTimeoutFunction(listOfKazoos[i], timeOffset, pauseTimeOffset)
@@ -63,15 +64,22 @@ class App extends React.Component {
 
     playKazooTimeoutFunction = (kazoo, timeOffset, pauseTimeOffset) => {
         setTimeout(() => {
-            kazoo.playSound()
+            // Statement is needed so sound doesn't turn on and immediately off, creating a bad noise
+            if ((kazoo.range.end * timeOffset) / 1000 > pauseTimeOffset) {
+                kazoo.playSound()
+            }
             this.stopKazooTimeoutFunction(kazoo, timeOffset, pauseTimeOffset)
         }, (kazoo.range.start - pauseTimeOffset) * timeOffset)
     }
 
     stopKazooTimeoutFunction = (kazoo, timeOffset, pauseTimeOffset) => {
-        setTimeout(function() {
-            kazoo.audio.currentTime = 0;
-            kazoo.audio.pause()
+        setTimeout(() => {
+            // If user hits the Play from Start button over and over, the timeout does not clear.
+            // Need to make sure we stop when the time running is about equal to this kazoos end point.
+            if (this.state.timeRunning > (.995 * kazoo.range.end * timeOffset) / 1000) {
+                kazoo.audio.currentTime = 0;
+                kazoo.audio.pause()
+            }
         }, (kazoo.range.end - kazoo.range.start - pauseTimeOffset) * timeOffset)
     }
 
@@ -116,7 +124,8 @@ class App extends React.Component {
         this.setState({kazoos: []})
     }
 
-    playNotes = () => {
+    playNotes = () => { //TODO REMOVE
+        this.restartKazoos()
         this.playKazoos(this.state.kazoos, this.state.secondIncrements)
     }
 
@@ -129,22 +138,18 @@ class App extends React.Component {
     }
 
     pauseKazoos = () => {
-        if (!(this.state.isPaused)) {
-            let temp = this.state.kazoos
-            this.setState({isTimerStarted: false})
-            temp.forEach((kazoo) => {
-                kazoo.audio.pause()
-            })
-            this.setState({kazoos: temp})
-            this.setState({isPaused: true})
-        }
+        let temp = this.state.kazoos
+        this.setState({isTimerStarted: false})
+        temp.forEach((kazoo) => {
+            kazoo.audio.pause()
+        })
+        this.setState({kazoos: temp})
+        this.setState({isPaused: true})
     }
 
     resume = () => {
-        if (this.state.isPaused) {
-            this.playKazoos(this.state.kazoos, this.state.secondIncrements, this.state.timeRunning)
-            this.setState({isPaused: false})
-        }
+        this.playKazoos(this.state.kazoos, this.state.secondIncrements, this.state.timeRunning)
+        this.setState({isPaused: false})
     }
 
     modifyAmplitude = (index, newVolume) => {
@@ -155,7 +160,7 @@ class App extends React.Component {
 
     restartKazoos = () => {
         this.setState({isRestart: true})
-        this.setState({isPaused: false})
+        this.setState({isPaused: true})
         this.setState({isTimerStarted: false})
         this.setState({timeRunning: 0})
         this.state.kazoos.forEach((kazoo) => {
@@ -169,10 +174,16 @@ class App extends React.Component {
     }
 
     setTimeManually = (stopTime) => {
+        console.log(stopTime)
         // Setting the time to a specific point is the equivalent of pausing at the point
-        this.setState({isPaused: false})
+        this.setState({isTimerStarted: false})
+        this.setState({isPaused: true})
         this.setState({timeRunning: stopTime})
         this.pauseKazoos()
+    }
+
+    fullFinish = () => {
+        this.setState({isPaused: true})
     }
 
     render() {
@@ -183,6 +194,7 @@ class App extends React.Component {
 
         return (
             <div className="App">
+                <h1 className="header">Kazoo Bandcamp</h1>
                 <header className="App-header">
                     <div className="parent">
                         <div className="maxSettings">
@@ -190,35 +202,35 @@ class App extends React.Component {
                                 Max Time
                                 <MaxValueInput volume={this.state.maxTime} onConfirmTime={this.handleConfirmTime}/>
                             </span>
-                        </div>
-                        Time Increments
-                        <div className="radioButtons">
-                            <div className="radio">
-                                <label>
-                                    <input type="radio" value="second" checked={this.state.secondIncrements === 'second'} onChange={this.handleRadioChange} />
-                                    Second
-                                </label>
-                            </div>
-                            <div className="radio">
-                                <label>
-                                    <input type="radio" value="deciSecond" checked={this.state.secondIncrements === 'deciSecond'} onChange={this.handleRadioChange} />
-                                    DeciSecond
-                                </label>
-                            </div>
+                            <span className="maxRadio">
+                                Time Increments
+                                <div className="radioButtons">
+                                    <div className="radio">
+                                        <label>
+                                            <input type="radio" value="second" checked={this.state.secondIncrements === 'second'} onChange={this.handleRadioChange} />
+                                            Second
+                                        </label>
+                                    </div>
+                                    <div className="radio">
+                                        <label>
+                                            <input type="radio" value="deciSecond" checked={this.state.secondIncrements === 'deciSecond'} onChange={this.handleRadioChange} />
+                                            DeciSecond
+                                        </label>
+                                    </div>
+                                </div>
+                            </span>
                         </div>
                     </div>
                         {displayKazoos}
                     <div className="kazooButtons">
-                        <button onClick={this.addNewKazoo}> Add New Kazoo </button>
-                        <button onClick={this.playNotes}> Play Notes</button>
-                        <div className="clearButton">
-                            <button onClick={this.pauseKazoos}> Pause </button>
-                            <button onClick={this.resume}> Resume </button>
-                            <button onClick={this.restartKazoos}> Restart </button>
+                        <div>
+                            <FontAwesomeIcon icon={faPlus} onClick={this.addNewKazoo}/>
+                            <FontAwesomeIcon className="mainGroupingButtons" icon={this.state.isPaused ? faPause: faPlay} onClick={!this.state.isPaused ? this.pauseKazoos : this.resume}/>
+                            <FontAwesomeIcon className="mainGroupingButtons" icon={faArrowLeft} onClick={this.restartKazoos}/>
+                            <FontAwesomeIcon icon={faEraser }className="mainGroupingButtons" onClick={this.clearAll}/>
                         </div>
-                        <button className="clearButton" onClick={this.clearAll}> Clear All </button>
                     </div>
-                    <ContinuousSlider className="botSlider" maxTime={this.state.maxTime} isTimerStarted={this.state.isTimerStarted} secondIncrements={this.state.secondIncrements} setTimeRunning={this.setTimeRunning} isRestart={this.state.isRestart} setRestartFalse={this.setRestartFalse} setTimeManually={this.setTimeManually}/>
+                    <ContinuousSlider className="botSlider" maxTime={this.state.maxTime} isTimerStarted={this.state.isTimerStarted} secondIncrements={this.state.secondIncrements} setTimeRunning={this.setTimeRunning} isRestart={this.state.isRestart} setRestartFalse={this.setRestartFalse} setTimeManually={this.setTimeManually} isFinished={this.fullFinish} timeOffset={this.state.secondIncrements}/>
                 </header>
             </div>
         );
@@ -227,22 +239,3 @@ class App extends React.Component {
 
 
 export default App;
-/*
-// // A D E F G
-    // var kazooG1 = new Kazoo('G')
-    // kazooG1.range.end = .3
-    // var kazooE1 = new Kazoo('E')
-    // kazooE1.start = .3
-    // kazooE1.end = 1
-    // var kazooG2 = new Kazoo('G')
-    // kazooG2.start = 1
-    // kazooG2.end = 3
-    // var kazooD1 = new Kazoo('D')
-    // kazooD1.start = 3
-    // kazooD1.end = 4
-    // listOfKazoos = [kazooG1, kazooE1, kazooG2, kazooD1]
- */
-
-/*
-a: .75
- */

@@ -1,6 +1,8 @@
 import React from 'react';
 import Amplitude from "./Amplitude"
 import RangeSlider from "./RangeSlider"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 export default class KazooReact extends React.Component {
 
@@ -66,10 +68,10 @@ export default class KazooReact extends React.Component {
                 <div className="kazooPaddingLeft">
                     <input type="text" value={this.props.range.end} onChange={this.handleInputRangeEnd}/>
                 </div>
-                <div className="kazooPaddingLeft">
-                    <button onClick={this.deleteKazoo}> Delete Kazoo </button>
-                </div>
                 <Amplitude modifyAmplitude={this.modifyAmplitude} />
+                <div className="kazooTrash">
+                    <FontAwesomeIcon onClick={this.deleteKazoo} icon={faTrash} />
+                </div>
             </div>
         )
     }

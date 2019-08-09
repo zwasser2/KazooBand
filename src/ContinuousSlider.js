@@ -30,8 +30,9 @@ export default class KazooReact extends React.Component {
             this.finish()
             this.props.setRestartFalse()
         }
-        const isPaused = !(this.props.isTimerStarted) && !(this.state.time > .99 * this.props.maxTime) && this.state.time !== 0
-        const finished = !(this.props.isTimerStarted) && (this.state.time > .99 * this.props.maxTime)
+        const timeOffset = this.props.timeOffset === 'second' ? 1 : .1
+        const isPaused = !(this.props.isTimerStarted) && !(this.state.time > .995 * this.props.maxTime * timeOffset)
+        const finished = !(this.props.isTimerStarted) && (this.state.time > .995 * this.props.maxTime * timeOffset)
         if (isPaused) {
             this.setState({startTime: performance.now()})
             this.setState({pauseTime: this.state.time})
@@ -54,6 +55,7 @@ export default class KazooReact extends React.Component {
         this.setState({startTime: -1})
         this.setState({pauseTime: 0})
         this.setState({time: 0})
+        this.props.isFinished()
     }
 
     changeTimeManually = (_, newValue) => {

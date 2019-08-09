@@ -16,11 +16,17 @@
   color: white;
 }
 
-.parent {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
+.header {
+  background-color: #282c34;
   justify-content: center;
+  font-size: calc(20px + 4vmin);
+  color: white;
+  margin: 0;
+  display:flex;
+  justify-content: flex-start;
+}
+
+.parent {
   padding: calc(100px + 2vmin) 0 0 0;
 }
 
@@ -48,11 +54,12 @@
 }
 
 .maxSettings {
-  flex: 3;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .radioButtons {
-  flex: 1;
+  display:flex;
 }
 
 .maxVolume {
@@ -101,9 +108,23 @@ button {
 }
 
 .clearButton {
-  margin-left:10vw;
+  margin-left:3vw;
+}
+
+.mainGroupingButtons {
+  margin-left: 3vw;
 }
 
 .soundBar {
   width: 200px;
+  margin-top: 15px;
+}
+
+.kazooTrash {
+  margin: 5px 0 0 10px;
+  color: #D9534F;
+}
+
+.radio {
+  margin-left: 10px;
 }
