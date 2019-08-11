@@ -6,6 +6,8 @@ import ContinuousSlider from './ContinuousSlider.js'
 import SheetMusic from './SheetMusic.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPause, faPlay, faArrowLeft, faPlus, faEraser} from '@fortawesome/free-solid-svg-icons'
+import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons"
+import { Link, Router } from 'react-router-dom';
 
 
 function Kazoo(kazooNote) {
@@ -242,6 +244,11 @@ class App extends React.Component {
                     <ContinuousSlider className="botSlider" maxTime={this.state.maxTime} isTimerStarted={this.state.isTimerStarted} secondIncrements={this.state.secondIncrements} setTimeRunning={this.setTimeRunning} isRestart={this.state.isRestart} setRestartFalse={this.setRestartFalse} setTimeManually={this.setTimeManually} isFinished={this.fullFinish} timeOffset={this.state.secondIncrements}/>
                 </header>
                 <SheetMusic kazoos={this.state.kazoos}/>
+                <div className="socialMedia">
+                    <a href="https://github.com/zwasser2/KazooBand"><FontAwesomeIcon icon={faGithub} href="https://github.com/zwasser2/KazooBand" size="4x"/></a>
+                    <a href="https://www.linkedin.com/in/zachary-wasserman-0b5018127/"><FontAwesomeIcon icon={faLinkedin} href="https://www.linkedin.com/in/zachary-wasserman-0b5018127/" size="4x"/></a>
+                </div>
+
             </div>
         );
     }

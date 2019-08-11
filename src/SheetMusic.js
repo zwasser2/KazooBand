@@ -10,33 +10,67 @@ export default class SheetMusic extends React.Component{
     }
 
     render() {
-        var offSet = -6
+        // Take a deep copy as doing directly was messing up order on UI (IE sorting by lowest start)
+        // Next, convert it to a 2D array so we can iterate over the notes on a corresponding line
+        // Then, convert each kazoo object into the correct React Object
+        // Lastly, iterate over the kazoo react object list and assign them to a bar graphically.
         var temp = JSON.parse(JSON.stringify(this.props.kazoos))
         temp.sort((a, b) => {
             return a.range.start - b.range.start
         })
-        var notes = (<div>
-            {temp.map((kazoo, index) => {
-                offSet += 3
-                var offSetSyle = {
-                    left: offSet + 'em'
+        var dictionary = []
+        if (temp.length !== 0) {
+            for (var i = 0; i < temp.length; i ++) {
+                if (typeof dictionary[Math.floor(i / 8)] === 'undefined') {
+                    dictionary[Math.floor(i / 8)] = []
                 }
-                return <span style={offSetSyle} className={"cat_sheet__note cat_sheet__note--" + kazoo.note}></span>
-            })}</div>)
-        var topOffset = {
-            top: 500 + 'px'
+                dictionary[Math.floor(i / 8)].push(temp[i])
+            }
+            var notes = []
+            for (var i = 0; i <= Math.floor(temp.length / 9); i ++) {
+                notes[i] = []
+                var offSet = -6
+                notes[i].push (<div>
+                    {dictionary[i].map((kazoo, index) => {
+                        offSet += 3
+                        var offSetSyle = {
+                            left: offSet + 'em'
+                        }
+                        return <span style={offSetSyle} className={"cat_sheet__note cat_sheet__note--" + kazoo.note}/>
+                    })}</div>)
+            }
+            var Test = ({notes}) => (
+                <div className="overAllSheet">
+                    {notes.map(note => (
+                        <div className='bars'>
+                            <div className="cat_sheet cat_sheet--animate">
+                                <span className="cat_sheet__lines">
+                                    <span className="cat_sheet__notes-wrapper">
+                                        {note}
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            )
+        } else {
+            var Test = () => (
+                <div className="overAllSheet">
+                    <div className='bars'>
+                        <div className="cat_sheet cat_sheet--animate">
+                            <span className="cat_sheet__lines">
+                                <span className="cat_sheet__notes-wrapper">
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            )
         }
         return(
             <div className='sheet'>
-                <div className='bars'>
-                    <div className="cat_sheet cat_sheet--animate">
-                        <span className="cat_sheet__lines">
-                            <span className="cat_sheet__notes-wrapper">
-                                {notes}
-                            </span>
-                        </span>
-                    </div>
-                </div>
+                <Test notes={notes}/>
             </div>
 
         )

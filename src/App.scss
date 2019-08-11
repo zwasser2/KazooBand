@@ -184,8 +184,31 @@ button {
     opacity:1
   }
 }
+a {
+  color: black;
+}
 
-/* ____________________ SHEET CSS ___________________ */
+a:visited {
+  color: black;
+}
+
+a:link {
+  color: black;
+}
+
+a:hover {
+  color: black;
+}
+
+a:active {
+  color: black;
+}
+
+a:focus {
+  color: black;
+}
+
+/* ____________________ MUSIC SHEET CSS ___________________ */
 $cat_color-sheet: #000000;
 $cat_color-sheet-note: #000000;
 $_sheet-border: 1px solid $cat_color-sheet;
@@ -240,7 +263,11 @@ $_sheet-note-width: $_sheet-padding + 0.1em;
 .sheet {
   background-color: #282c34;
   padding-bottom: 300px;
+}
+
+.overAllSheet {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
 }
 
