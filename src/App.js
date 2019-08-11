@@ -7,7 +7,6 @@ import SheetMusic from './SheetMusic.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPause, faPlay, faArrowLeft, faPlus, faEraser} from '@fortawesome/free-solid-svg-icons'
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons"
-import { Link, Router } from 'react-router-dom';
 
 
 function Kazoo(kazooNote) {
@@ -16,25 +15,26 @@ function Kazoo(kazooNote) {
         start: 0,
         end: 0
     }
+    this.volume = 1
     this.audio = new Audio("https://enterdnscompliantname.s3.us-east-2.amazonaws.com/kazoo" + kazooNote + "3Min.wav")
     this.audio.loop = true
-}
-
-Kazoo.prototype.playSound = function() {
-    this.audio.play()
-}
-
-Kazoo.prototype.setVolume = function(newVolume) {
-    this.audio.volume = newVolume
 }
 
 class App extends React.Component {
     constructor(props) {
         // I create this initial Kazoo to give the user an idea of how the UI is set up
         super(props)
+        let localStorageKazoos = window.localStorage.getItem('kazoos')
+        if (localStorageKazoos !== null) {
+            localStorageKazoos = JSON.parse(localStorageKazoos)
+            localStorageKazoos = this.getAudioForLocalStorage(localStorageKazoos)
+        } else {
+            localStorageKazoos = []
+        }
+        console.log(localStorageKazoos)
         this.state = {
             secondIncrements: 'second',
-            kazoos: [],
+            kazoos: localStorageKazoos,
             maxTime: 5,
             isTimerStarted: false,
             timeRunning: 0,
@@ -42,6 +42,14 @@ class App extends React.Component {
             isPaused: true,
             isRestart: false,
         }
+    }
+
+    getAudioForLocalStorage = (localStorageKazoos) => {
+        localStorageKazoos.forEach((kazoo) => {
+            kazoo.audio = new Audio("https://enterdnscompliantname.s3.us-east-2.amazonaws.com/kazoo" + kazoo.note + "3Min.wav")
+            kazoo.audio.volume = kazoo.volume
+        })
+        return localStorageKazoos
     }
 
     playKazoos = (listOfKazoos, secondIncrements, pauseTimeOffset) => {
@@ -64,9 +72,10 @@ class App extends React.Component {
 
     playKazooTimeoutFunction = (kazoo, timeOffset, pauseTimeOffset) => {
         setTimeout(() => {
+            console.log(kazoo)
             // Statement is needed so sound doesn't turn on and immediately off, creating a bad noise
             if ((kazoo.range.end * timeOffset) / 1000 > pauseTimeOffset && !this.state.isPaused) {
-                kazoo.playSound()
+                kazoo.audio.play()
             }
             this.stopKazooTimeoutFunction(kazoo, timeOffset, pauseTimeOffset)
         }, (kazoo.range.start - pauseTimeOffset) * timeOffset)
@@ -154,6 +163,8 @@ class App extends React.Component {
                 [kazoo.range.end, kazoo.range.start] = [kazoo.range.start, kazoo.range.end]
             }
         })
+        window.localStorage.clear()
+        window.localStorage.setItem('kazoos', JSON.stringify(temp))
         this.setState({kazoos: temp})
         this.playKazoos(this.state.kazoos, this.state.secondIncrements, this.state.timeRunning)
         this.setState({isPaused: false})
@@ -161,7 +172,10 @@ class App extends React.Component {
 
     modifyAmplitude = (index, newVolume) => {
         const temp = this.state.kazoos
+        // We need it stored in the audio.volume so it actually has an effect and in just Object.volume for
+        // when we reload for localStorage as the Audio object gets destroyed
         temp[index].audio.volume = newVolume
+        temp[index].volume = newVolume
         this.setState({kazoos: temp})
     }
 
