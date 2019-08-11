@@ -72,6 +72,7 @@ export default class KazooReact extends React.Component {
                 <div className="timeSlider">
                     <Slider
                         value={(this.state.time).toFixed(2)}
+                        step={.01}
                         onChange={this.changeTimeManually}
                         aria-labelledby="continuous-slider"
                         valueLabelDisplay="auto"

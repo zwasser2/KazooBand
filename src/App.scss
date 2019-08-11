@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: #282c34;
 }
 
 .App-logo {
@@ -10,7 +11,7 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 75vh;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
@@ -184,3 +185,139 @@ button {
   }
 }
 
+/* ____________________ SHEET CSS ___________________ */
+$cat_color-sheet: #000000;
+$cat_color-sheet-note: #000000;
+$_sheet-border: 1px solid $cat_color-sheet;
+$_sheet-padding: 0.3em;
+$_sheet-note-width: $_sheet-padding + 0.1em;
+
+@mixin font-size($size) {
+  font-size: #{$size/10}rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.cat_sheet {
+  padding-top: 1.3em;
+  padding-bottom: 1.3em;
+  text-align: center;
+  line-height: 1.4;
+  @include font-size(20);
+}
+
+.cat_sheet__lines {
+  display: block;
+  position: relative;
+  border-top: $_sheet-border;
+  height: 0;
+  border-bottom: $_sheet-border;
+  padding-top: $_sheet-padding;
+  padding-bottom: $_sheet-padding + 0.03;
+
+  &:before,
+  &:after {
+    content: '';
+    display: block;
+    width: 100%;
+    padding-top: $_sheet-padding;
+    padding-bottom: $_sheet-padding + 0.03;
+    border-top: $_sheet-border;
+  }
+
+  &:after {
+    border-bottom: $_sheet-border;
+  }
+
+  &:before {
+    position:absolute;
+    top: -0.4em;
+  }
+}
+
+.sheet {
+  background-color: #282c34;
+  padding-bottom: 300px;
+  display: flex;
+  justify-content: center;
+}
+
+.bars {
+  width: 75%;
+  background-color: white;
+}
+
+.cat_sheet__notes-wrapper {
+  $_width: 22em;
+  position: absolute;
+  width: $_width;
+  top: 0;
+  left: 50%;
+  margin-left: -$_width/2;
+}
+
+%_sheet-stick-down {
+  &:before {
+    content: '';
+    border-left: 1px solid $cat_color-sheet-note;
+    height: 1em;
+    position: relative;
+    left: -(($_sheet-note-width/2) - (($_sheet-note-width/2) / 8));
+  }
+}
+
+%_sheet-stick-up {
+  &:before {
+    content: '';
+    border-right: 2px solid $cat_color-sheet-note;
+    height: 1em;
+    position: relative;
+    left: ($_sheet-note-width/2) - (($_sheet-note-width/2) / 8);
+    top: -1.15em;
+  }
+}
+
+.cat_sheet__note {
+  position: absolute;
+  height: $_sheet-padding;
+  width: $_sheet-note-width;
+  background-color: $cat_color-sheet-note;
+  border-radius: #{$_sheet-note-width "/" $_sheet-padding};
+
+  &.cat_sheet__note--A {
+    @extend %_sheet-stick-up;
+    top: 0.33em;
+  }
+
+  &.cat_sheet__note--B {
+    @extend %_sheet-stick-up;
+    top: 0.18em;
+  }
+
+  &.cat_sheet__note--C {
+    @extend %_sheet-stick-down;
+    top: 0.03em;
+  }
+
+  &.cat_sheet__note--D {
+    @extend %_sheet-stick-down;
+    top: -.12em;
+  }
+
+  &.cat_sheet__note--G {
+    @extend %_sheet-stick-up;
+    top: 0.48em;
+  }
+
+  &.cat_sheet__note--F {
+    @extend %_sheet-stick-up;
+    top: 0.63em;
+  }
+
+  &.cat_sheet__note--E {
+    @extend %_sheet-stick-up;
+    top: 0.78em;
+  }
+}

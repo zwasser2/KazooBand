@@ -30,6 +30,7 @@ export default function RangeSlider(props) {
             </Typography>
             <Slider
                 value={props.passedRange || value}
+                step={.01}
                 onChange={handleChange}
                 valueLabelDisplay="auto"
                 aria-labelledby="range-slider"

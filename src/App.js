@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 import MaxValueInput from './MaxValueInput.js'
 import KazooReact from './kazoo.js'
 import ContinuousSlider from './ContinuousSlider.js'
@@ -146,6 +146,13 @@ class App extends React.Component {
     }
 
     resume = () => {
+        let temp = this.state.kazoos
+        temp.forEach((kazoo) => {
+            if (kazoo.range.end < kazoo.range.start) {
+                [kazoo.range.end, kazoo.range.start] = [kazoo.range.start, kazoo.range.end]
+            }
+        })
+        this.setState({kazoos: temp})
         this.playKazoos(this.state.kazoos, this.state.secondIncrements, this.state.timeRunning)
         this.setState({isPaused: false})
     }
@@ -234,6 +241,7 @@ class App extends React.Component {
                     </div>
                     <ContinuousSlider className="botSlider" maxTime={this.state.maxTime} isTimerStarted={this.state.isTimerStarted} secondIncrements={this.state.secondIncrements} setTimeRunning={this.setTimeRunning} isRestart={this.state.isRestart} setRestartFalse={this.setRestartFalse} setTimeManually={this.setTimeManually} isFinished={this.fullFinish} timeOffset={this.state.secondIncrements}/>
                 </header>
+                <SheetMusic kazoos={this.state.kazoos}/>
             </div>
         );
     }
