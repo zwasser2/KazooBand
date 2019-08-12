@@ -208,6 +208,24 @@ a:focus {
   color: black;
 }
 
+.authorText {
+  font-size: calc(8px + 1vmin);
+  padding-bottom: 15px;
+  color: black;
+  font-weight: 700;
+}
+
+@media only screen and (max-width: 600px) {
+  .kazooItems {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: calc(10px + 2vmin) 0 0 0;
+    border-bottom: 2px white solid;
+  }
+}
+
 /* ____________________ MUSIC SHEET CSS ___________________ */
 $cat_color-sheet: #000000;
 $cat_color-sheet-note: #000000;
@@ -260,6 +278,10 @@ $_sheet-note-width: $_sheet-padding + 0.1em;
   }
 }
 
+.sheetLine {
+
+}
+
 .sheet {
   background-color: #282c34;
   padding-bottom: 300px;
@@ -274,15 +296,15 @@ $_sheet-note-width: $_sheet-padding + 0.1em;
 .bars {
   width: 75%;
   background-color: white;
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 }
 
 .cat_sheet__notes-wrapper {
-  $_width: 22em;
+  $_width: 100%;
   position: absolute;
   width: $_width;
   top: 0;
-  left: 50%;
-  margin-left: -$_width/2;
+  left: 0%;
 }
 
 %_sheet-stick-down {
@@ -307,11 +329,11 @@ $_sheet-note-width: $_sheet-padding + 0.1em;
 }
 
 .cat_sheet__note {
-  position: absolute;
   height: $_sheet-padding;
   width: $_sheet-note-width;
   background-color: $cat_color-sheet-note;
   border-radius: #{$_sheet-note-width "/" $_sheet-padding};
+  position: absolute;
 
   &.cat_sheet__note--A {
     @extend %_sheet-stick-up;

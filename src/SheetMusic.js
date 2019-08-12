@@ -27,14 +27,14 @@ export default class SheetMusic extends React.Component{
                 dictionary[Math.floor(i / 8)].push(temp[i])
             }
             var notes = []
-            for (var i = 0; i <= Math.floor(temp.length / 9); i ++) {
+            for (var i = 0; i <= Math.floor((temp.length - 1) / 8); i ++) {
                 notes[i] = []
-                var offSet = -6
-                notes[i].push (<div>
+                var offSet = 5
+                notes[i].push (<div className="sheetLine">
                     {dictionary[i].map((kazoo, index) => {
-                        offSet += 3
+                        offSet += 10
                         var offSetSyle = {
-                            left: offSet + 'em'
+                            left: offSet + '%'
                         }
                         return <span style={offSetSyle} className={"cat_sheet__note cat_sheet__note--" + kazoo.note}/>
                     })}</div>)

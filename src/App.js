@@ -31,7 +31,6 @@ class App extends React.Component {
         } else {
             localStorageKazoos = []
         }
-        console.log(localStorageKazoos)
         this.state = {
             secondIncrements: 'second',
             kazoos: localStorageKazoos,
@@ -72,7 +71,6 @@ class App extends React.Component {
 
     playKazooTimeoutFunction = (kazoo, timeOffset, pauseTimeOffset) => {
         setTimeout(() => {
-            console.log(kazoo)
             // Statement is needed so sound doesn't turn on and immediately off, creating a bad noise
             if ((kazoo.range.end * timeOffset) / 1000 > pauseTimeOffset && !this.state.isPaused) {
                 kazoo.audio.play()
@@ -133,11 +131,6 @@ class App extends React.Component {
         this.setState({kazoos: []})
     }
 
-    playNotes = () => { //TODO REMOVE
-        this.restartKazoos()
-        this.playKazoos(this.state.kazoos, this.state.secondIncrements)
-    }
-
     handleRadioChange = (event) => {
         this.setState({secondIncrements: event.target.value})
     }
@@ -195,7 +188,6 @@ class App extends React.Component {
     }
 
     setTimeManually = (stopTime) => {
-        console.log(stopTime)
         // Setting the time to a specific point is the equivalent of pausing at the point
         this.setState({isTimerStarted: false})
         this.setState({isPaused: true})
@@ -246,7 +238,9 @@ class App extends React.Component {
                             </span>
                         </div>
                     </div>
+                    <div className="kazooParent">
                         {displayKazoos}
+                    </div>
                     <div className="kazooButtons">
                         <div>
                             <FontAwesomeIcon icon={faPlus} onClick={this.addNewKazoo}/>
@@ -262,6 +256,7 @@ class App extends React.Component {
                     <a href="https://github.com/zwasser2/KazooBand"><FontAwesomeIcon icon={faGithub} href="https://github.com/zwasser2/KazooBand" size="4x"/></a>
                     <a href="https://www.linkedin.com/in/zachary-wasserman-0b5018127/"><FontAwesomeIcon icon={faLinkedin} href="https://www.linkedin.com/in/zachary-wasserman-0b5018127/" size="4x"/></a>
                 </div>
+                <div className="authorText">Made by Zachary Wasserman, zacharyswasserman@gmail.com</div>
 
             </div>
         );
