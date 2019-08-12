@@ -21,6 +21,9 @@ React, SCSS, Javascript, CSS, HTML
 
 *
  A. https://github.com/Hivenfour/SeamlessLoop , I found it still didn't make it seamless regardless of the title. This was actually a common theme with a couple github projects I tried.
-    B. WebAudio, It works. However, the 'download / decode' time for it was not usable. (https://bugs.chromium.org/p/chromium/issues/detail?id=424174)
-    C. Native Audio Object but with setInterval to check if the song is about at it's end. This is in itself a more precise .loop implementation where I could set the interval time to something small. I wasn't sure how costly this would be on computers though with a large amount of notes.
-    D. Native Audio Object but with a 3 min Loop. This is what I ended up doing. Technically, if someone had a note go for 3 minutes without interruption there could be an issue as the Audio.loop would cause a gap, however I assume that this wouldn't happen.
+    
+B. WebAudio, It works. However, the 'download / decode' time for it was not usable. (https://bugs.chromium.org/p/chromium/issues/detail?id=424174)
+    
+C. Native Audio Object but with setInterval to check if the song is about at it's end. This is in itself a more precise .loop implementation where I could set the interval time to something small. I wasn't sure how costly this would be on computers though with a large amount of notes.
+    
+D. Native Audio Object but with a 3 min Loop. This is what I ended up doing. Technically, if someone had a note go for 3 minutes without interruption there could be an issue as the Audio.loop would cause a gap, however I assume that this wouldn't happen.
