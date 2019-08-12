@@ -14,7 +14,6 @@ function valuetext(value) {
 }
 
 export default function RangeSlider(props) {
-    const self = this
     const classes = useStyles();
 
     const [value, setValue] = React.useState([0, props.maxValue]);

@@ -1,5 +1,4 @@
 import React from 'react';
-import KazooReact from "./kazoo"
 
 export default class SheetMusic extends React.Component{
     constructor(props) {
@@ -27,7 +26,7 @@ export default class SheetMusic extends React.Component{
                 dictionary[Math.floor(i / 8)].push(temp[i])
             }
             var notes = []
-            for (var i = 0; i <= Math.floor((temp.length - 1) / 8); i ++) {
+            for (i = 0; i <= Math.floor((temp.length - 1) / 8); i ++) {
                 notes[i] = []
                 var offSet = 5
                 notes[i].push (<div className="sheetLine">
@@ -36,14 +35,14 @@ export default class SheetMusic extends React.Component{
                         var offSetSyle = {
                             left: offSet + '%'
                         }
-                        return <span style={offSetSyle} className={"cat_sheet__note cat_sheet__note--" + kazoo.note}/>
+                        return <span key={i + index.toString()} style={offSetSyle} className={"cat_sheet__note cat_sheet__note--" + kazoo.note}/>
                     })}</div>)
             }
             var Test = ({notes}) => (
                 <div className="overAllSheet">
                     {notes.map(note => (
                         <div className='bars'>
-                            <div className="cat_sheet cat_sheet--animate">
+                            <div className="cat_sheet">
                                 <span className="cat_sheet__lines">
                                     <span className="cat_sheet__notes-wrapper">
                                         {note}
@@ -55,10 +54,10 @@ export default class SheetMusic extends React.Component{
                 </div>
             )
         } else {
-            var Test = () => (
+            Test = () => (
                 <div className="overAllSheet">
                     <div className='bars'>
-                        <div className="cat_sheet cat_sheet--animate">
+                        <div className="cat_sheet">
                             <span className="cat_sheet__lines">
                                 <span className="cat_sheet__notes-wrapper">
                                 </span>
